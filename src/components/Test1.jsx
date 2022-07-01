@@ -66,7 +66,6 @@ export default function Test1() {
     } else {
       setShowSignUpError(true);
     }
-    console.log('signUpDetails:', signUpDetails);
   }
 
   function instructions() {
