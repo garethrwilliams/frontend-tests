@@ -3,7 +3,9 @@ const movieData = require('../assets/movies.json');
 
 export default function Test2() {
   const [showInstructions, setShowInstructions] = useState(false);
+  const [listIncludesTemp, setListIncludesTemp] = useState('');
   const [listIncludes, setListIncludes] = useState('');
+  const [timer, setTimer] = useState(null);
 
   function instructions() {
     return (
@@ -92,9 +94,13 @@ export default function Test2() {
                 if (v === 'ratings') {
                   return <td className='pr-4'>{avRating}</td>;
                 }
+
+                if (v === 'cast') {
+                  return <td className='text-sm'>{movie[v].join(', ')}</td>;
+                }
                 return (
                   <td
-                    className={`${v === 'cast' ? 'text-sm' : ''} ${
+                    className={` ${
                       v === 'year' || v === 'director' ? 'px-6' : ''
                     } `}
                   >
@@ -117,6 +123,19 @@ export default function Test2() {
     );
   }
 
+  function handleTextInput(e) {
+    e.preventDefault();
+    setListIncludesTemp(e.target.value);
+
+    clearTimeout(timer);
+
+    const newTimer = setTimeout(() => {
+      setListIncludes(listIncludesTemp);
+    }, 1000);
+
+    setTimer(newTimer);
+  }
+
   return (
     <main className='text-center '>
       <h1 className='font-semibold text-2xl'>Movie List Filter</h1>
@@ -136,8 +155,8 @@ export default function Test2() {
       <input
         className='border rounded-md border-black mb-4 w-2/3 p-2'
         placeholder='Search by Title, Director, Genre or Actor'
-        onChange={(e) => setListIncludes(e.target.value)}
-        value={listIncludes}
+        onChange={handleTextInput}
+        value={listIncludesTemp}
       ></input>
 
       {makeTable()}

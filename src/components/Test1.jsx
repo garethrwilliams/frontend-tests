@@ -121,7 +121,7 @@ export default function Test1() {
         action='test1'
         method='GET'
         id='loginForm'
-        className='border border-red-600 mx-36 my-4 pb-2'
+        className='border border-red-600 w-4/5 m-auto sm:w-1/2 md:w-1/3 my-4 pb-2'
       >
         <fieldset>
           <legend className='font-bold py-2'>LOG IN</legend>
